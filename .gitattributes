@@ -1,0 +1,10 @@
+# Normalise line endings of the code and documents
+* text=auto
+
+# Files of the original run are kept byte for byte (no line-ending conversion on any system), so that their SHA-256
+# values in provenance/original_run/MANIFEST.json stay valid
+provenance/original_run/** -text
+
+*.png binary
+*.pdf binary
+*.zip binary

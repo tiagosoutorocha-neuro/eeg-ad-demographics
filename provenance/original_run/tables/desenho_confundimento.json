@@ -1,0 +1,29 @@
+{
+  "gerado_em": "2026-11-20T17:14:55",
+  "observacao": "gerado na seção 3.5, antes de qualquer predição (seção 4)",
+  "n_pares_1a1": 15,
+  "sha1_pares": "c9431e69f4e8",
+  "n_pares_comparaveis_brainlat": 199,
+  "n_pares_comparaveis_grego": 80,
+  "overlap_BrainLat": {
+    "covariaveis": [
+      "Age",
+      "sex_fem",
+      "years_education"
+    ],
+    "metodo_ps": "MLE",
+    "ess_AD": 17.208696357945872,
+    "ess_HC": 18.20736979364992,
+    "n": 67
+  },
+  "overlap_Grego": {
+    "covariaveis": [
+      "Age",
+      "sex_fem"
+    ],
+    "metodo_ps": "MLE",
+    "ess_AD": 31.630798143403023,
+    "ess_HC": 26.925839516299728,
+    "n": 65
+  }
+}

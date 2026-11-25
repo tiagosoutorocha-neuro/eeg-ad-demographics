@@ -1,0 +1,10 @@
+﻿coorte,análise,AUC,lo,hi,n
+BrainLat,Full cohort,0.68125,0.5446428571428571,0.8035937499999999,67 participants
+BrainLat,Education-matched 1:1 (±2 y),0.6977777777777777,0.5154444444444445,0.8623333333333328,15 pairs
+BrainLat,Comparable-pair concordance (education ±2 y),0.678391959798995,0.5025101352171485,0.8340435072989218,199 pairs
+BrainLat,"Overlap-weighted (age, sex, education)",0.6669999791734368,0.4529453122513718,0.8363296386903961,ESS 17/18
+BrainLat,"Covariate-adjusted AUC (age, sex, education)",0.71875,0.5463839285714286,0.8633928571428571,67 participants
+Grego,Full cohort,0.8687739463601531,0.7672174329501915,0.9473180076628352,65 participants
+Grego,"Overlap-weighted (age, sex)",0.8651337422966173,0.7522179234865866,0.9482808297457656,ESS 32/27
+Grego,"Comparable-pair concordance (same sex, age ±2 y)",0.85,0.6881189047261816,0.9714579256360076,80 pairs
+Grego,"Covariate-adjusted AUC (age, sex)",0.8601532567049809,0.7519157088122606,0.9435105363984673,65 participants

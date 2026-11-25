@@ -1,0 +1,21 @@
+# Copy this file to config/paths.yaml (which is not tracked by git) and edit it.
+# Use forward slashes, also on Windows (C:/Users/...). Relative paths are relative to the repository root.
+
+# Folder that contains 1_AD and 5_HC (if you point to a parent folder, the single matching subfolder is used).
+# In the distributed BrainLat repository this is usually .../2_Version/data/raw/brainlat
+brainlat_dir: 'C:/Users/you/data/BrainLat_dataset_Alzheimer_EEG-main/2_Version/data/raw/brainlat'
+
+# ds004504 v1.0.9. If the folder is empty or incomplete, notebook 00 downloads what is missing (2.95 GB).
+ds004504_dir: 'C:/Users/you/data/ds004504'
+
+# Outputs (tables, figures, caches, subject-level derived files). Keep it outside git: it is in .gitignore.
+outputs_dir: 'outputs'
+
+# CPU cores for the Random Forest and XGBoost (-1 = all).
+n_jobs: -1
+
+# false: only verify the files already in ds004504_dir.
+download_ds004504: true
+
+# NEVER true for results. Fewer trees, bootstrap replicates and epochs, only to check that the code runs.
+quick_test_mode: false

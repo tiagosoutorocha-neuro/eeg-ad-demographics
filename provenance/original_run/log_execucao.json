@@ -1,0 +1,22 @@
+{
+  "spec_congelada_em": "2026-11-20T10:33:16",
+  "congelamentos": [
+    {
+      "hash": "fcdd59491d8d1aa8",
+      "congelada_em": "2026-11-20T10:33:16"
+    }
+  ],
+  "execucoes": [
+    {
+      "inicio": "2026-11-20T10:27:04",
+      "rapido": false,
+      "spec_hash": "fcdd59491d8d1aa8"
+    },
+    {
+      "inicio": "2026-11-20T17:14:54",
+      "rapido": false,
+      "spec_hash": "fcdd59491d8d1aa8"
+    }
+  ],
+  "rotulos_gregos_lidos_em": "2026-11-20T10:33:16"
+}

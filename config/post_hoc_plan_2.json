@@ -1,0 +1,51 @@
+{
+  "amendment": 2,
+  "title": "Post hoc amendment 2: hyperparameter sensitivity of the Random Forest, group spectra and the montage error map",
+  "status": "post hoc: decided after the results of notebooks 02-06 were seen; outside the reading rules of the analysis plan; descriptive",
+  "amends": {
+    "file": "config/analysis_plan.json",
+    "plan_hash": "d694ec84c0e48616",
+    "note": "The analysis plan is not edited (its hash stays the same); this amendment has its own hash and is frozen by notebooks 10 and 11 before they compute anything. Amendment 1 (config/post_hoc_plan.json) is unchanged."
+  },
+  "written_on": "2026-11-25",
+  "rationale": "The hyperparameters of the Random Forest were fixed in the plan and never tuned, to avoid optimistic estimates. Reviewers may ask whether the conclusions depend on that choice. Part A re-runs the frozen pipeline with a small grid of hyperparameters, changed one at a time, and reports every configuration without choosing the best. Parts B and C are descriptive figures of the harmonised data: the group-average power spectra and the angular error of the BrainLat 10-20 correspondence.",
+  "A_hyperparameter_sensitivity": {
+    "question": "Do discrimination, incremental value and transport depend on the Random Forest hyperparameters fixed in the plan?",
+    "reference": "the frozen configuration of the plan (n_estimators 300, max_depth none, max_features sqrt, min_samples_leaf 1, bootstrap, class_weight balanced, random_state 42)",
+    "grid": [
+      {"label": "Frozen (plan)", "change": {}},
+      {"label": "min_samples_leaf = 5", "change": {"min_samples_leaf": 5}},
+      {"label": "min_samples_leaf = 20", "change": {"min_samples_leaf": 20}},
+      {"label": "min_samples_leaf = 50", "change": {"min_samples_leaf": 50}},
+      {"label": "max_depth = 5", "change": {"max_depth": 5}},
+      {"label": "max_depth = 10", "change": {"max_depth": 10}},
+      {"label": "max_features = 0.5", "change": {"max_features": 0.5}},
+      {"label": "max_features = all", "change": {"max_features": 1.0}},
+      {"label": "class_weight = none", "change": {"class_weight": null}},
+      {"label": "n_estimators = 1000", "change": {"n_estimators": 1000}}
+    ],
+    "design": "one hyperparameter changed at a time; everything else as in the plan (11 features, 19 channels, epoch-level training, subject P(AD) = mean over epochs, same seed, same standardisation)",
+    "validation": "the same leave-one-subject-out within each cohort as notebook 02; transport as in notebook 05 (trained on the whole source cohort, applied once to the other)",
+    "metrics": {
+      "within_cohort": "AUC of the EEG score with bootstrap 95% CI (2000 resamples, stratified, seed 42)",
+      "incremental_value": "OR per 1 SD of the EEG score beyond the covariates of the cohort, profile-likelihood 95% CI, and the likelihood-ratio statistic; no p-value (the null bootstrap is too expensive to repeat and the naive p is liberal)",
+      "transport": "AUC in the other cohort with bootstrap 95% CI, and the calibration slope"
+    },
+    "check": "the frozen configuration must reproduce the predictions of notebooks 02 and 05 exactly",
+    "selection": "none: no configuration is chosen; all are reported (Table S11, Fig. S5)"
+  },
+  "B_group_spectra": {
+    "question": "What do the harmonised spectra look like, by cohort and diagnosis?",
+    "method": "the same reading and preprocessing as the features (19 channels, average reference, 40 Hz low-pass of the Greek data, 0.5-45 Hz FIR, 4-s epochs, RMS normalisation); Welch spectrum of each epoch with the same 1 Hz resolution, averaged over the 19 channels and divided by its power in 0.5-45 Hz (relative spectral density); mean over the epochs of each participant",
+    "participants": "the participants with analysable EEG (as in the analyses)",
+    "summary": "mean of the participants of each group with a bootstrap 95% interval (participants resampled; 2000 resamples; seed 42)",
+    "sharing": "only group curves are written to the files meant for sharing; participant spectra stay in outputs/descriptive/",
+    "reporting": "descriptive (Fig. S2); no test"
+  },
+  "C_montage_error_map": {
+    "method": "the BrainLat electrode positions and the 10-20 positions used by notebook 01 (same functions, same file), projected on the head; each 10-20 position coloured by the angle to its BioSemi electrode",
+    "reference_spacing": "angle between each 10-20 position and its nearest 10-20 neighbour, to compare with the errors",
+    "reporting": "descriptive (Fig. S1, with Table S1)"
+  },
+  "reporting": "Labelled 'post hoc' (part A) or 'descriptive' (parts B and C) wherever it appears. None of it changes a reading of RQ1-RQ3."
+}

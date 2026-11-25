@@ -1,0 +1,31 @@
+﻿bloco,coorte,análise,estimativa,p,leitura
+RQ1 — incremental value,BrainLat,Within-cohort EEG score beyond Age + sex_fem + years_education,"OR/SD 2.00 [0.98, 4.74]",null bootstrap 0.094 (106 replicates); analytic 0.058,não demonstrado
+RQ1 — incremental value,Grego,Within-cohort EEG score beyond Age + sex_fem,"OR/SD 18.63 [4.82, 134.35]",null bootstrap one-sided 0.005 (199 replicates); analytic < 0.001,acrescenta
+RQ1 — incremental value,BrainLat,Score from the other cohort's model beyond Age + sex_fem + years_education (independent),"OR/SD 3.02 [1.41, 8.61]",0.003,confirmação independente
+RQ1 — incremental value,Grego,Score from the other cohort's model beyond Age + sex_fem (independent),"OR/SD 9.34 [3.37, 38.18]",< 0.001 one-sided,confirmação independente
+RQ1 — incremental value,BrainLat,Check: + site,"OR/SD 2.06 [0.99, 5.10]",0.055,verificação
+RQ1 — incremental value,Pooled,EEG score beyond cohort-specific demographics (common EEG effect),"OR/SD 4.46 [2.36, 9.66]",< 0.001; cohort × EEG 0.005,heterogêneo ou incerto
+Discrimination (logistic: leave-one-out; EEG: LOSO),BrainLat,Age,"AUC 0.699 [0.571, 0.816]",,
+Discrimination (logistic: leave-one-out; EEG: LOSO),BrainLat,Age + sex,"AUC 0.682 [0.552, 0.802]",,
+Discrimination (logistic: leave-one-out; EEG: LOSO),BrainLat,Age + sex + education,"AUC 0.862 [0.761, 0.944]",,
+Discrimination (logistic: leave-one-out; EEG: LOSO),BrainLat,"EEG score (RF, LOSO)","AUC 0.681 [0.545, 0.804]",,
+Discrimination (logistic: leave-one-out; EEG: LOSO),BrainLat,Demographics + EEG score,"AUC 0.876 [0.780, 0.949]",,
+Discrimination (logistic: leave-one-out; EEG: LOSO),Grego,Age,"AUC 0.519 [0.378, 0.667]",,
+Discrimination (logistic: leave-one-out; EEG: LOSO),Grego,Age + sex,"AUC 0.618 [0.486, 0.757]",,
+Discrimination (logistic: leave-one-out; EEG: LOSO),Grego,"EEG score (RF, LOSO)","AUC 0.869 [0.767, 0.947]",,
+Discrimination (logistic: leave-one-out; EEG: LOSO),Grego,Demographics + EEG score,"AUC 0.842 [0.734, 0.930]",,
+Discrimination (logistic: leave-one-out; EEG: LOSO),BrainLat,"EEG score, threshold 0.5","sens 0.714, espec 0.562, acurácia balanceada 0.638, acurácia 0.642, F1 0.676, MCC 0.280",,
+Discrimination (logistic: leave-one-out; EEG: LOSO),Grego,"EEG score, threshold 0.5","sens 0.722, espec 0.966, acurácia balanceada 0.844, acurácia 0.831, F1 0.825, MCC 0.694",,
+RQ2 — confounding removed by design,BrainLat,Full cohort,"0.681 [0.545, 0.804] (67 participants)",,
+RQ2 — confounding removed by design,BrainLat,Education-matched 1:1 (±2 y),"0.698 [0.515, 0.862] (15 pairs)",,sobrevive em parte
+RQ2 — confounding removed by design,BrainLat,Comparable-pair concordance (education ±2 y),"0.678 [0.503, 0.834] (199 pairs)",,sobrevive em parte
+RQ2 — confounding removed by design,BrainLat,"Overlap-weighted (age, sex, education)","0.667 [0.453, 0.836] (ESS 17/18)",,sobrevive em parte
+RQ2 — confounding removed by design,BrainLat,"Covariate-adjusted AUC (age, sex, education)","0.719 [0.546, 0.863] (67 participants)",,sobrevive em parte
+RQ2 — confounding removed by design,Grego,Full cohort,"0.869 [0.767, 0.947] (65 participants)",,
+RQ2 — confounding removed by design,Grego,"Overlap-weighted (age, sex)","0.865 [0.752, 0.948] (ESS 32/27)",,sobrevive
+RQ2 — confounding removed by design,Grego,"Comparable-pair concordance (same sex, age ±2 y)","0.850 [0.688, 0.971] (80 pairs)",,sobrevive
+RQ2 — confounding removed by design,Grego,"Covariate-adjusted AUC (age, sex)","0.860 [0.752, 0.944] (65 participants)",,sobrevive
+RQ3 — transportability,Grego,BrainLat → grego,"AUC 0.855 [0.757, 0.937]; sens 0.667, espec 0.897, acurácia balanceada 0.782, acurácia 0.769, F1 0.762, MCC 0.568",calibration slope 1.94; calibration-in-the-large 0.31,transporta
+RQ3 — transportability,BrainLat,Grego → BrainLat,"AUC 0.726 [0.596, 0.844]; sens 0.914, espec 0.406, acurácia balanceada 0.660, acurácia 0.672, F1 0.744, MCC 0.376",calibration slope 1.15; calibration-in-the-large -0.40,transporta
+RQ3 — transportability,Grego,"BrainLat → grego, padronizado por coorte","AUC 0.867 [0.763, 0.951]",calibration slope 3.24; calibration-in-the-large 0.34,secundária
+RQ3 — transportability,BrainLat,"Grego → BrainLat, padronizado por coorte","AUC 0.738 [0.609, 0.849]",calibration slope 0.83; calibration-in-the-large -0.32,secundária

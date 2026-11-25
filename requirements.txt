@@ -1,0 +1,17 @@
+# Versions of the original run (Python 3.11.9, Windows). Use them to reproduce the published numbers exactly.
+numpy==2.4.6
+pandas==3.0.6
+scipy==1.17.1
+scikit-learn==1.9.1
+xgboost==3.2.0
+mne==1.13.2
+matplotlib==3.11.2
+PyYAML>=6.0
+python-docx==1.2.0   # notebook 10: the tables of the article as a Word file
+# notebooks and tests
+jupyterlab>=4
+ipykernel>=6
+nbclient>=0.10
+nbformat>=5.10
+pytest>=8
+eeglabio>=0.0.3   # only for scripts/make_synthetic.py (writes EEGLAB files)

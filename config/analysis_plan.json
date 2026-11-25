@@ -1,0 +1,134 @@
+{
+  "plan_version": "journal — BrainLat + ds004504, analysis plan of 2026-11-19",
+  "working_title": "What Does Resting-State EEG Add to Demographics in Alzheimer's Disease? Incremental Value, Confounding, and Transportability Across Two Cohorts",
+  "seed": 42,
+  "labels": {"HC": 0, "AD": 1},
+  "cohorts": {
+    "brainlat": {
+      "folders": {"AD": "1_AD", "HC": "5_HC"},
+      "female_sex_value": 0,
+      "sex_code_source": "brainlat_dataset_dictionary.csv: sex 0 = female, 1 = male",
+      "covariates": ["Age", "sex_fem", "years_education"]
+    },
+    "greek": {
+      "dataset": "ds004504 (OpenNeuro; Miltiadous et al., 2023)",
+      "openneuro_version": "1.0.9",
+      "doi": "10.18112/openneuro.ds004504.v1.0.9",
+      "groups": {"A": 1, "C": 0},
+      "excluded": "F (frontotemporal dementia)",
+      "use_derivatives": true,
+      "covariates": ["Age", "sex_fem"],
+      "education": "not recorded: E-value"
+    }
+  },
+  "channels_1020": ["Fp1", "Fp2", "F7", "F3", "Fz", "F4", "F8", "T3", "C3", "Cz", "C4",
+                    "T4", "T5", "P3", "Pz", "P4", "T6", "O1", "O2"],
+  "brainlat_channel_mapping": "nearest BioSemi electrode to each 10-20 position (angle on the unit sphere, one-to-one assignment by linear_sum_assignment)",
+  "preprocessing": {
+    "reference": "average of the 19 channels",
+    "filter": "FIR (firwin) 0.5-45 Hz, zero phase",
+    "greek_band_harmonization": {
+      "reason": "BrainLat was distributed band-passed with a Butterworth 0.5-40 Hz filter, order 8, zero phase (Prado et al., 2023); the ds004504 derivatives with 0.5-45 Hz (README)",
+      "h_freq": 40.0, "order": 8, "type": "butter", "phase": "zero"
+    },
+    "epoch_s": 4.0,
+    "normalization": "RMS per subject (does not change the features)",
+    "welch_resolution_hz": 1.0,
+    "sampling_rate": "native (512 Hz in BrainLat; 500 Hz in ds004504)",
+    "max_epochs_per_subject": null,
+    "epoch_rejection": "none, as in the conference paper (only epochs with NaN/inf features are dropped)"
+  },
+  "features": {
+    "all": ["Rel_Theta_mean", "Rel_Alpha_mean", "Rel_Beta_mean", "Rel_Gamma_mean",
+            "Ratio_Theta_Alpha", "Ratio_Theta_Beta", "Spectral_Entropy",
+            "PLV_Theta_mean", "PLV_Alpha_mean", "PLV_Beta_mean", "Corr_Broadband_mean"],
+    "spectral": ["Rel_Theta_mean", "Rel_Alpha_mean", "Rel_Beta_mean", "Rel_Gamma_mean",
+                 "Ratio_Theta_Alpha", "Ratio_Theta_Beta", "Spectral_Entropy"]
+  },
+  "primary_model": "RandomForest",
+  "classifiers": {
+    "RandomForest": {"n_estimators": 300, "max_depth": null, "max_features": "sqrt", "min_samples_leaf": 1,
+                     "bootstrap": true, "class_weight": "balanced", "random_state": 42},
+    "XGBoost": {"n_estimators": 300, "learning_rate": 0.05, "max_depth": 5, "subsample": 0.8,
+                "colsample_bytree": 0.8, "eval_metric": "logloss", "random_state": 42,
+                "scale_pos_weight": "n_HC/n_AD in the training epochs of each fold"},
+    "SVM": {"kernel": "rbf", "C": 1.0, "gamma": "scale", "calibration": "sigmoid", "calibration_folds": 3,
+            "calibration_grouped_by_subject": true, "random_state": 42}
+  },
+  "validation": {
+    "scheme": "leave-one-subject-out (LOSO) within each cohort; training at the epoch level; subject P(AD) = mean over epochs",
+    "bootstrap_n": 2000,
+    "bootstrap": "subjects resampled with replacement, stratified by class"
+  },
+  "rq1": {
+    "score": "logit of the out-of-fold P(AD), standardised within the cohort (OR per 1 SD)",
+    "test": "statistic: likelihood-ratio (1 df) of the logistic model demographics + score; p-value by parametric bootstrap of the whole LOSO under H0, because the naive test with cross-validated scores can be liberal (Hofling & Tibshirani, 2008; Shang et al., 2025); OR CI by profile likelihood (descriptive)",
+    "null_bootstrap": {
+      "B_max": 199,
+      "stop_after_exceedances": 10,
+      "scheme": "y* ~ Bernoulli(P(AD | covariates)) from the null model; LOSO re-run with y*; sequential stopping of Besag & Clifford (1991)"
+    },
+    "independent": "valid check without resampling: score of the model trained on the OTHER cohort, beyond demographics (Dinga et al., 2020: the parametric test is valid on independent data)",
+    "firth_rule": "Firth if the MLE does not converge or any standardised |beta| exceeds 10",
+    "greek_one_sided": true,
+    "direction": "OR > 1, fixed by BrainLat",
+    "delta_auc": "leave-one-out balanced logistic regression (demographics vs demographics + EEG score); descriptive, not tested",
+    "e_value": "VanderWeele & Ding (2017); RR approx. sqrt(OR) because the outcome is common",
+    "e_value_reference": "in BrainLat, OR of the EEG score adjusted for age + sex vs + education (how much education matters)",
+    "brainlat_site_check": "age + sex + education + site; check, outside the reading rule",
+    "pooled": "AD ~ cohort + covariates with cohort-specific effects (BrainLat: age, sex, education; Greek: age, sex) + common z_EEG; heterogeneity: + cohort x z_EEG (LR, 1 df)"
+  },
+  "rq2": {
+    "brainlat_matching": {
+      "variable": "years_education",
+      "caliper_years": 2,
+      "ratio": "1:1",
+      "algorithm": "optimal (linear_sum_assignment), without replacement, ties broken by age",
+      "ci": "pair bootstrap (Austin & Small, 2014)",
+      "min_pairs": 10,
+      "n_random_tiebreaks": 200
+    },
+    "brainlat_comparable_pairs": {"education_caliper_years": 2},
+    "brainlat_overlap": ["Age", "sex_fem", "years_education"],
+    "greek_overlap": ["Age", "sex_fem"],
+    "greek_comparable_pairs": {"same_sex": true, "age_caliper_years": 2},
+    "aauc": "check: covariate-adjusted AUC (Janes & Pepe, 2009), with the score standardised by the linear regression in the controls (BrainLat: age, sex, education; Greek: age, sex)",
+    "score": "out-of-fold P(AD) of the RF, without retraining"
+  },
+  "rq3": {
+    "primary": "BrainLat -> Greek: RF trained on all of BrainLat, frozen and applied once",
+    "secondary": "Greek -> BrainLat",
+    "recalibration": "none; subject-level AUC is the primary metric",
+    "calibration": "descriptive: slope, intercept with slope fixed at 1 (calibration-in-the-large; Van Calster et al., 2016) and Brier score",
+    "threshold": 0.5,
+    "per_cohort_standardization": "secondary: each feature standardised (mean and SD of all epochs) within its own cohort, without labels, before training and applying; outside the reading rule"
+  },
+  "exploratory": {
+    "run": true,
+    "brainlat": "MoCA in AD (parallel to the MMSE); partial Spearman rho adjusted for age and education",
+    "brainlat_secondary": "IFS in AD (continuity with the conference paper); same adjustment",
+    "greek": "MMSE in AD; partial Spearman rho adjusted for age"
+  },
+  "per_feature_descriptive": "each feature (subject mean, standardised) beyond the cohort covariates; OR per 1 SD, profile CI, Benjamini-Hochberg q within cohort; outside the reading rule",
+  "sensitivity": {
+    "spectral_only": true,
+    "no_gamma": true,
+    "exclude_gamma_above": 0.15,
+    "classifiers": ["SVM", "XGBoost"]
+  },
+  "reading_rules": {
+    "RQ1a": "adds if the (two-sided) null-bootstrap p is below 0.05",
+    "RQ1b": "adds if the one-sided (OR > 1) null-bootstrap p is below 0.05",
+    "RQ1c": "consistent if the cohort x EEG interaction has p >= 0.05 and the ORs point the same way",
+    "RQ2": "survives if the 95% CI of the confounding-free AUC (or concordance) lies above 0.5",
+    "RQ3": "transports if the 95% CI of the AUC in the other cohort lies above 0.5",
+    "otherwise": "not demonstrated (never 'EEG carries no information')"
+  },
+  "change_history": [],
+  "provenance": {
+    "translated_from": "provenance/original_run/SPEC_journal.json (original specification, in Portuguese)",
+    "original_hash": "fcdd59491d8d1aa8",
+    "original_frozen_at": "2026-11-20T10:33:16",
+    "note": "One-to-one translation of keys, feature names and descriptions (Razao_* -> Ratio_*). All numerical settings, seeds, models and reading rules are unchanged."
+  }
+}

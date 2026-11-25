@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the article and this software."
+title: "eeg-ad-demographics: incremental value, confounding and transportability of resting-state EEG for Alzheimer's disease"
+version: 1.1.0
+date-released: 2026-11-25
+license: MIT
+repository-code: "https://github.com/tiagosoutorocha-neuro/eeg-ad-demographics"
+authors:
+  - family-names: "Rocha"
+    given-names: "Tiago"
+    affiliation: "Universidade Estadual da Paraíba (UEPB), Campina Grande, Brazil"
+    orcid: "https://orcid.org/0009-0003-0287-1336"
+  - family-names: "Souto"
+    given-names: "Sabrina"
+    affiliation: "Universidade Estadual da Paraíba (UEPB), Campina Grande, Brazil"
+keywords:
+  - EEG
+  - Alzheimer's disease
+  - machine learning
+  - external validation
+  - confounding

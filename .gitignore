@@ -1,0 +1,33 @@
+# Machine-specific settings (data paths)
+config/paths.yaml
+
+# Outputs: contain subject-level derived data (BrainLat data-use terms) and caches
+outputs/
+outputs_*/
+
+# EEG and other raw data must never be committed
+*.set
+*.fdt
+*.edf
+*.bdf
+*.vhdr
+*.eeg
+*.fif
+data/
+synthetic_data/
+
+# Python / Jupyter
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.ipynb_checkpoints/
+.pytest_cache/
+*.pkl
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,16 @@
+﻿coorte,variável,AD,HC,p,teste
+BrainLat,n,35,32,,
+BrainLat,Age (years),76.5 ± 7.6,69.8 ± 7.7,0.002,Mann–Whitney
+BrainLat,"Female, n (%)",22 (62.9),20 (62.5),1.000,Fisher
+BrainLat,Education (years),9.3 ± 4.6,15.6 ± 3.4,< 0.001,Mann–Whitney
+BrainLat,Site (Argentina / Chile),16 / 19,19 / 13,0.330,Fisher
+BrainLat,MoCA,17.0 ± 3.4 (29),25.6 ± 3.2 (23),< 0.001,Mann–Whitney
+BrainLat,IFS,14.4 ± 4.9 (33),23.0 ± 5.6 (20),< 0.001,Mann–Whitney
+BrainLat,Recording analysed (min),7.1 ± 2.3,7.8 ± 1.9,0.324,Mann–Whitney
+BrainLat,Epochs per participant,106 ± 35,116 ± 29,0.321,Mann–Whitney
+Grego (ds004504),n,36,29,,
+Grego (ds004504),Age (years),66.4 ± 7.9,67.9 ± 5.4,0.383,Mann–Whitney
+Grego (ds004504),"Female, n (%)",24 (66.7),11 (37.9),0.026,Fisher
+Grego (ds004504),MMSE,17.8 ± 4.5 (36),30.0 ± 0.0 (29),< 0.001,Mann–Whitney
+Grego (ds004504),Recording analysed (min),13.5 ± 2.7,13.9 ± 1.1,0.584,Mann–Whitney
+Grego (ds004504),Epochs per participant,202 ± 41,207 ± 16,0.575,Mann–Whitney

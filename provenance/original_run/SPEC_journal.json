@@ -1,0 +1,223 @@
+{
+  "hash": "fcdd59491d8d1aa8",
+  "congelada_em": "2026-11-20T10:33:16",
+  "spec": {
+    "versao": "journal — BrainLat + ds004504, plano de 19/11/2026",
+    "titulo_de_trabalho": "What Does Resting-State EEG Add to Demographics in Alzheimer's Disease? Incremental Value, Confounding, and Transportability Across Two Cohorts",
+    "semente": 42,
+    "rotulos": {
+      "HC": 0,
+      "AD": 1
+    },
+    "coortes": {
+      "brainlat": {
+        "pastas": {
+          "AD": "1_AD",
+          "HC": "5_HC"
+        },
+        "sexo_valor_feminino": 0,
+        "fonte_codigo_sexo": "brainlat_dataset_dictionary.csv: sex 0 = female, 1 = male",
+        "covariaveis": [
+          "Age",
+          "sex_fem",
+          "years_education"
+        ]
+      },
+      "grego": {
+        "dataset": "ds004504 (OpenNeuro; Miltiadous et al., 2023)",
+        "versao_openneuro": "1.0.9",
+        "doi": "10.18112/openneuro.ds004504.v1.0.9",
+        "grupos": {
+          "A": 1,
+          "C": 0
+        },
+        "excluidos": "F (demência frontotemporal)",
+        "usar_derivatives": true,
+        "covariaveis": [
+          "Age",
+          "sex_fem"
+        ],
+        "escolaridade": "não medida: E-value"
+      }
+    },
+    "canais_1020": [
+      "Fp1",
+      "Fp2",
+      "F7",
+      "F3",
+      "Fz",
+      "F4",
+      "F8",
+      "T3",
+      "C3",
+      "Cz",
+      "C4",
+      "T4",
+      "T5",
+      "P3",
+      "Pz",
+      "P4",
+      "T6",
+      "O1",
+      "O2"
+    ],
+    "mapeamento_brainlat": "eletrodo BioSemi mais próximo de cada posição 10-20 (ângulo na esfera unitária, atribuição única por linear_sum_assignment)",
+    "preprocessamento": {
+      "referencia": "média dos 19 canais",
+      "filtro": "FIR (firwin) 0,5–45 Hz, fase zero",
+      "harmonizacao_banda_grego": {
+        "motivo": "o BrainLat foi distribuído com passa-banda Butterworth 0,5–40 Hz, ordem 8, fase zero (Prado et al., 2023); os derivatives do ds004504, com 0,5–45 Hz (README)",
+        "h_freq": 40.0,
+        "ordem": 8,
+        "tipo": "butter",
+        "fase": "zero"
+      },
+      "epoca_s": 4.0,
+      "normalizacao": "RMS por sujeito (não altera as features)",
+      "welch_resolucao_hz": 1.0,
+      "taxa_amostragem": "nativa (512 Hz no BrainLat; 500 Hz no ds004504)",
+      "max_epocas_por_sujeito": null,
+      "rejeicao_epocas": "nenhuma, como no artigo (só épocas com NaN/inf são descartadas)"
+    },
+    "features": {
+      "todas": [
+        "Rel_Theta_mean",
+        "Rel_Alpha_mean",
+        "Rel_Beta_mean",
+        "Rel_Gamma_mean",
+        "Razao_Theta_Alpha",
+        "Razao_Theta_Beta",
+        "Spectral_Entropy",
+        "PLV_Theta_mean",
+        "PLV_Alpha_mean",
+        "PLV_Beta_mean",
+        "Corr_Broadband_mean"
+      ],
+      "espectrais": [
+        "Rel_Theta_mean",
+        "Rel_Alpha_mean",
+        "Rel_Beta_mean",
+        "Rel_Gamma_mean",
+        "Razao_Theta_Alpha",
+        "Razao_Theta_Beta",
+        "Spectral_Entropy"
+      ]
+    },
+    "modelo_primario": "RandomForest",
+    "classificadores": {
+      "RandomForest": {
+        "n_estimators": 300,
+        "max_depth": null,
+        "max_features": "sqrt",
+        "min_samples_leaf": 1,
+        "bootstrap": true,
+        "class_weight": "balanced",
+        "random_state": 42
+      },
+      "XGBoost": {
+        "n_estimators": 300,
+        "learning_rate": 0.05,
+        "max_depth": 5,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "eval_metric": "logloss",
+        "random_state": 42,
+        "scale_pos_weight": "n_HC/n_AD nas épocas de treino de cada fold"
+      },
+      "SVM": {
+        "kernel": "rbf",
+        "C": 1.0,
+        "gamma": "scale",
+        "calibracao": "sigmoid",
+        "folds_calibracao": 3,
+        "calibracao_agrupada_por_sujeito": true,
+        "random_state": 42
+      }
+    },
+    "validacao": {
+      "esquema": "LOSO por sujeito dentro de cada coorte; treino no nível de época; P(AD) do sujeito = média das épocas",
+      "bootstrap_n": 2000,
+      "bootstrap": "sujeitos reamostrados com reposição, estratificado por classe"
+    },
+    "rq1": {
+      "escore": "logit de P(AD) out-of-fold, padronizado dentro da coorte (OR por 1 DP)",
+      "teste": "estatística: razão de verossimilhança (1 gl) da logística demografia + escore; p-valor por bootstrap paramétrico sob H0 de todo o LOSO, porque o teste ingênuo com escores de validação cruzada pode ser liberal (Höfling & Tibshirani, 2008; Shang et al., 2025); IC do OR por verossimilhança perfilada (descritivo)",
+      "bootstrap_nulo": {
+        "B_max": 199,
+        "parar_apos_excedencias": 10,
+        "esquema": "y* ~ Bernoulli(P(AD | covariáveis)) do modelo nulo; LOSO refeito com y*; parada sequencial de Besag & Clifford (1991)"
+      },
+      "independente": "verificação válida sem reamostragem: escore do modelo treinado na OUTRA coorte, além da demografia (Dinga et al., 2020: teste paramétrico vale em dados independentes)",
+      "regra_firth": "Firth se a MLE não convergir ou se algum |β| padronizado passar de 10",
+      "grego_unilateral": true,
+      "direcao": "OR > 1, fixada pelo BrainLat",
+      "delta_auc": "LOO logística balanceada (demografia vs demografia + escore EEG); descritivo, sem teste",
+      "e_value": "VanderWeele & Ding (2017); RR ≈ √OR porque o desfecho é comum",
+      "e_value_referencia": "no BrainLat, OR do EEG ajustado por idade + sexo vs + escolaridade (quanto a escolaridade pesa)",
+      "verificacao_sitio_brainlat": "idade + sexo + escolaridade + sítio; verificação, fora da regra de leitura",
+      "conjunto": "AD ~ coorte + covariáveis com efeito próprio em cada coorte (BrainLat: idade, sexo, escolaridade; grego: idade, sexo) + z_EEG comum; heterogeneidade: + coorte × z_EEG (LR, 1 gl)"
+    },
+    "rq2": {
+      "pareamento_brainlat": {
+        "variavel": "years_education",
+        "calibre_anos": 2,
+        "razao": "1:1",
+        "algoritmo": "ótimo (linear_sum_assignment), sem reposição, desempate pela idade",
+        "ic": "bootstrap de pares (Austin & Small, 2014)",
+        "min_pares": 10,
+        "n_desempates_aleatorios": 200
+      },
+      "pares_comparaveis_brainlat": {
+        "calibre_escolaridade_anos": 2
+      },
+      "overlap_brainlat": [
+        "Age",
+        "sex_fem",
+        "years_education"
+      ],
+      "overlap_grego": [
+        "Age",
+        "sex_fem"
+      ],
+      "pares_comparaveis_grego": {
+        "mesmo_sexo": true,
+        "calibre_idade_anos": 2
+      },
+      "aauc": "verificação: AUC ajustada por covariáveis (Janes & Pepe, 2009), com o escore padronizado pela regressão linear nos controles (BrainLat: idade, sexo, escolaridade; grego: idade, sexo)",
+      "escore": "P(AD) out-of-fold do RF, sem retreino"
+    },
+    "rq3": {
+      "principal": "BrainLat → grego: RF treinado em todo o BrainLat, congelado e aplicado uma única vez",
+      "secundaria": "grego → BrainLat",
+      "recalibracao": "nenhuma; AUC por sujeito é a métrica principal",
+      "calibracao": "descritiva: inclinação, intercepto com inclinação fixa em 1 (calibration-in-the-large; Van Calster et al., 2016) e Brier",
+      "limiar_metricas": 0.5,
+      "padronizacao_por_coorte": "secundária: cada feature padronizada (média e DP de todas as épocas) dentro da própria coorte, sem rótulos, antes de treinar e aplicar; fora da regra de leitura"
+    },
+    "exploratoria": {
+      "executar": true,
+      "brainlat": "MoCA nos AD (paralelo ao MMSE); ρ de Spearman parcial para idade e escolaridade",
+      "brainlat_secundaria": "IFS nos AD (continuidade com o artigo da ACDSA); mesmo ajuste",
+      "grego": "MMSE nos AD; ρ de Spearman parcial para idade"
+    },
+    "descritiva_por_feature": "cada feature (média por sujeito, padronizada) além das covariáveis da coorte; OR por 1 DP, IC perfilado, q de Benjamini–Hochberg dentro da coorte; fora da regra de leitura",
+    "sensibilidade": {
+      "so_espectrais": true,
+      "sem_gama": true,
+      "excluir_gama_acima_de": 0.15,
+      "classificadores": [
+        "SVM",
+        "XGBoost"
+      ]
+    },
+    "regra_de_leitura": {
+      "RQ1a": "acrescenta se o p do bootstrap nulo (bilateral) for menor que 0,05",
+      "RQ1b": "acrescenta se o p unilateral do bootstrap nulo (OR > 1) for menor que 0,05",
+      "RQ1c": "consistente se a interação coorte × EEG tiver p ≥ 0,05 e os OR apontarem para o mesmo lado",
+      "RQ2": "sobrevive se o IC95% da AUC (ou da concordância) sem confusão ficar acima de 0,5",
+      "RQ3": "transporta se o IC95% da AUC na outra coorte ficar acima de 0,5",
+      "resto": "não demonstrado (nunca 'o EEG não tem informação')"
+    },
+    "historico_alteracoes": []
+  }
+}

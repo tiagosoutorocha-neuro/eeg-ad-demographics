@@ -1,0 +1,9 @@
+﻿variável,incluídos,excluídos,p,teste
+n,67,14,,
+"AD, n (%)",35 (52),0 (0),< 0.001,Fisher
+"Chile, n (%)",32 (48),14 (100),< 0.001,Fisher
+"Female, n (%)",42 (63),10 (71),0.760,Fisher
+Age (years),73.3 ± 8.3 (67),75.0 ± 4.0 (14),0.442,Mann–Whitney
+Education (years),12.3 ± 5.1 (67),12.8 ± 4.8 (14),0.880,Mann–Whitney
+MoCA,20.8 ± 5.4 (52),25.2 ± 3.3 (8),0.025,Mann–Whitney
+Diagnosis × site of the excluded,,HC Chile: 14,,

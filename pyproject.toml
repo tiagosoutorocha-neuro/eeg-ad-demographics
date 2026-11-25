@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "eegad"
+version = "1.1.0"
+description = "Incremental value, confounding and transportability of resting-state EEG for Alzheimer's disease (BrainLat and ds004504)"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy>=2.0",
+    "pandas>=2.2",
+    "scipy>=1.13",
+    "scikit-learn>=1.5",
+    "mne>=1.8",
+    "matplotlib>=3.9",
+    "PyYAML>=6.0",
+    "python-docx>=1.1",
+]
+
+[project.optional-dependencies]
+xgboost = ["xgboost>=2.0"]
+dev = ["pytest>=8", "nbclient>=0.10", "nbformat>=5.10", "ipykernel>=6", "eeglabio>=0.0.3"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["slow: runs the whole pipeline on synthetic data (minutes)"]

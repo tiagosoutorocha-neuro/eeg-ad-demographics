@@ -1,0 +1,43 @@
+{
+ "unredacted_originals_sha256": {
+  "RESUMO_JOURNAL.md": "e657040188e0bed2cfed94eac0f5ed1b5bc4ad0e1e7b62ce3895ed7c8e02ed3c",
+  "Journal_EEG_demografia_2coortes.ipynb": "e1fe885327846f5ddfa3e0a772ba3e744f10a3ef5dcdbddbd28e1b3409b8feed",
+  "download_ds004504.json": "dde3e027b7dbcc70146b46d050396c5da0961646150c7dcce50ab9c3c68d486c"
+ },
+ "files_sha256": {
+  "RESUMO_JOURNAL_redacted.md": "4f11a614c07c26cd89f90047d7cd91f8ae2e088eeb87468e011902109663b609",
+  "SPEC_journal.json": "8505fd0473ad3e65a9c7d722ee65ebbdb807c6875e4026539310b87576d94ca1",
+  "ambiente.txt": "b418bf55261582ae1ba438b0c9a5412e62b79227a99263c6bf5435941c26676e",
+  "download_ds004504.json": "c7b1b031f939bda033d8b8bdf289e514488bafc52a9365e2ed2f0652b03b09a1",
+  "figures/fig0_fluxograma_participantes.pdf": "ae9f014b0eaa62d330d1c983e776a2c850d4efcfdf9b75b66f393448e7699924",
+  "figures/fig0_fluxograma_participantes.png": "0b6bf924c334c27a709ec33ca9fe5abba1675e460be66ce80bc989c241bb0b29",
+  "figures/fig1_roc_duas_coortes.pdf": "92d12b174b9da5c675de124c9e2b397ba166abf842ff2ba6dc9bc6a06627d1f8",
+  "figures/fig1_roc_duas_coortes.png": "3e655b2ed2a97dfedc103bb1b6a289448471c5fa5aa7e6eb18bf0399deea193d",
+  "figures/fig2_or_incremental.pdf": "022447b9f4a604b9c4b3402ecb694fe4b50b478be9e56076719649be1771444f",
+  "figures/fig2_or_incremental.png": "fafc22626c86ec7be5a095e3b41615c3f67bd438387f36115986365e966efba3",
+  "figures/fig3_confundimento.pdf": "20168f44c41a74cffd462981f30572fb8d0c8cac7ba9e050a3218275ba46ca68",
+  "figures/fig3_confundimento.png": "7c8fc6ad3890fb594dc4bd4a158b4faa7a0c1d086e45ef052a90f9aba88d465d",
+  "key_results.json": "22cbcba8c0d63caffa8271d0a48fd687755f86723bdcf51f233a2976c8a0c622",
+  "log_execucao.json": "3414b98df62eb698831c2c100089a5fdfc6e4e231c271979ec51c66ae7b4a3c8",
+  "original_notebook_pt.ipynb": "249cf30454c6929640bc2a6b0eb38ac4a2763ed3583afefbbd447771daa35564",
+  "tables/F0_fluxo_participantes.csv": "1c8ff880cef9d96334ebe90c8703c34a9d2f4d6230b1eed71e704566047ba8da",
+  "tables/S1_mapa_canais_brainlat_1020.csv": "c93c69dc0b67532c243fe21fbc54f55a514be04b2e8cd08d60bd2d8a5b18d7f5",
+  "tables/S2_features_por_coorte.csv": "36a8fe8af526c4d2861c638d3f3536ee05ed06fe7b55dd3495dcfb23d83b8779",
+  "tables/S3_balanco_BrainLat_overlap.csv": "30f191c40e7061210e88a2dbde73a19d4abd7633234776f8fd144c2691b99e40",
+  "tables/S3_balanco_BrainLat_pareamento.csv": "83281ccbc59a969e5c01ea6aae7d820ec229afed06bd9efd362bf227fa244dc8",
+  "tables/S3_balanco_Grego_overlap.csv": "c54ed88f9ad686d7347032e28b50f5c60d83d2020b9121918eacd77bc4b50f0b",
+  "tables/S4_exploratoria_gravidade.csv": "2ec2fe07f5ce75f0847133d017930156648e870d3132eca7d4db71fd74c0648a",
+  "tables/S5_sensibilidade.csv": "90ff22eab2bef3c27459cfde19f4dc41afa51adca61a88eb2d3500437ca5f690",
+  "tables/S6_features_alem_da_demografia.csv": "a1fecee546ba4eb1f9060e27a7633ab79a21ecb54335db9653513a011d232152",
+  "tables/S7_brainlat_incluidos_vs_excluidos.csv": "f8c871728b1b0be624b9645515fad4dcdc6a15863b82d010aef8ad276bb7cf1d",
+  "tables/T1_participantes.csv": "aa8fc390691edaf84743d1c76632301ef0c47e77de21febad627145a1c21a18c",
+  "tables/T1b_gravidade_por_coorte.csv": "7193c6fbbf9c71c2ae14896fa32309d727eb8b3ef79b5f4c72c32c90b1878f3a",
+  "tables/T1c_estagios_MMSE_grego.csv": "4effc80efcd2b353a92e862d216b09e9dc06bb369e32d1550e29d95d816b1bca",
+  "tables/T2_resultados_principais.csv": "20480714b6576a46dd911066988189e057fb95a942d42a0571259593ce2d50f0",
+  "tables/T2b_confundimento_por_desenho.csv": "d770379e8085afb3a16f905fcccd5bccc7af9b98a2897be806eb9f4fa4c95bc2",
+  "tables/bootstrap_nulo_BrainLat.json": "4e13df3bbc78d990f1afbdbdbb31e3e36683540330eb7f8257e1970a6eb85d73",
+  "tables/bootstrap_nulo_Grego.json": "be3a87475cb02e1eeb3d6df7e1040793a9138959fe8a5ab8c189411804636e62",
+  "tables/desenho_confundimento.json": "773a38e7c4064d482014b60840932e150f7bdc9e06a5ed8ce6aedaf267b21518"
+ },
+ "note": "files_sha256: files in this folder. unredacted_originals_sha256: the original files kept by the authors (the summary before redacting 14 participant identifiers, the notebook before replacing its two default local paths, and the full download record)."
+}

@@ -1,0 +1,12 @@
+﻿coorte,etapa,n,AD,HC,excluidos_na_etapa,motivo,FTD
+BrainLat,Listed in the distributed demographic files (AD and HC folders),81,35,46,0,,
+BrainLat,Resting-state EEG file (.set) available,81,35,46,14,EEG data file (.fdt) missing (n = 14),
+BrainLat,"Analysable EEG: within-cohort LOSO (RQ1a, RQ2a) and transport target (RQ3b)",67,35,32,0,,
+BrainLat,"Complete covariates (age, sex, education): incremental-value model",67,35,32,,,
+BrainLat,AD with MoCA (exploratory),29,29,0,,,
+Grego,Listed in participants.tsv (ds004504 v1.0.9),88,36,29,23,"frontotemporal dementia, excluded by design (n = 23)",23.0
+Grego,AD and cognitively normal controls,65,36,29,0,,
+Grego,Resting-state EEG file (.set) available,65,36,29,0,,
+Grego,"Analysable EEG: within-cohort LOSO (RQ1b, RQ2b) and transport target (RQ3a)",65,36,29,0,,
+Grego,"Complete covariates (age, sex): incremental-value model",65,36,29,,,
+Grego,AD with MMSE (exploratory),36,36,0,,,

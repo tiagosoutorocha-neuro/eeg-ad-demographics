@@ -1,0 +1,36 @@
+{
+  "amendment": 1,
+  "title": "Post hoc amendment 1: local recalibration of the transported models (RQ3)",
+  "status": "post hoc: decided after the results of notebook 05 were seen; outside the reading rules of the analysis plan; descriptive",
+  "amends": {
+    "file": "config/analysis_plan.json",
+    "plan_hash": "d694ec84c0e48616",
+    "note": "The analysis plan is not edited (its hash stays the same); this amendment has its own hash and is frozen by notebook 09 before it runs."
+  },
+  "written_on": "2026-11-25",
+  "rationale": "In RQ3 the frozen models ranked participants well in the other cohort, but their probabilities were miscalibrated (BrainLat -> Greek: calibration slope above 1, risk underestimated; Greek -> BrainLat: risk overestimated). This amendment asks whether a local recalibration, estimated in the target cohort without retraining the model, corrects the probabilities and the decisions at the fixed threshold.",
+  "inputs": {
+    "BrainLat -> Greek": "outputs/predictions/transport_RQ3a.csv",
+    "Greek -> BrainLat": "outputs/predictions/transport_RQ3b.csv"
+  },
+  "methods": {
+    "recalibration": {
+      "intercept_only": "logit(p') = a + logit(p): recalibration-in-the-large",
+      "intercept_and_slope": "logit(p') = a + b * logit(p): logistic recalibration (Cox, 1958; Van Calster et al., 2016)"
+    },
+    "estimation": "logistic regression of the target-cohort diagnoses on logit(p) of the frozen model (MLE; Firth only if the MLE does not converge); logit(p) with p clipped to [0.001, 0.999], as in notebook 05",
+    "validation": "leave-one-subject-out within the target cohort: the recalibrated probability of each participant uses parameters estimated without that participant",
+    "reported_equation": "parameters estimated on the whole target cohort (what a new site would apply)",
+    "models_retrained": "none: the frozen Random Forests of notebook 05 are not changed, so the ranking of the participants (AUC) is that of the frozen models"
+  },
+  "metrics": {
+    "calibration": ["calibration slope", "calibration-in-the-large (intercept with the slope fixed at 1)", "Brier score"],
+    "threshold": 0.5,
+    "threshold_metrics": ["sensitivity", "specificity", "balanced accuracy", "MCC"],
+    "uncertainty": "95% percentile intervals from 2000 bootstrap resamples of the participants, stratified by diagnosis, with the cross-validated probabilities held fixed (seed 42); the Brier difference uses the same resamples",
+    "n_boot": 2000,
+    "seed": 42,
+    "calibration_curve": {"bins": 5, "binning": "quintiles of the predicted probability", "interval": "Wilson 95% interval of the observed proportion"}
+  },
+  "reporting": "Labelled 'post hoc' wherever it appears (Methods, Results, Table S8, Fig. 6). It does not change any reading of RQ1-RQ3."
+}
