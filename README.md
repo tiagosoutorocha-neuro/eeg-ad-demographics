@@ -4,6 +4,8 @@
 Analysis code for the study above. Everything - from downloading the open dataset to the figures, tables and the
 submission material - runs from thirteen Jupyter notebooks that call a small Python package (`src/eegad`).
 
+![Study design: two cohorts, one harmonised EEG pipeline and three research questions](docs/study_design.png)
+
 **Objective.** To determine whether resting-state EEG adds information about Alzheimer's disease (AD) beyond
 sociodemographic variables, and whether this added information survives confounder control and transfer across cohorts.
 
