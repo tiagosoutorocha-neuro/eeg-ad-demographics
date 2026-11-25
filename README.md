@@ -1,8 +1,8 @@
 # What Does Resting-State EEG Add to Demographics in Alzheimer's Disease?
 ### Incremental Value, Confounding, and Transportability Across Two Cohorts
 
-Analysis code for the study above. Everything — from downloading the open dataset to the figures, tables and the
-submission material — runs from thirteen Jupyter notebooks that call a small Python package (`src/eegad`).
+Analysis code for the study above. Everything - from downloading the open dataset to the figures, tables and the
+submission material - runs from thirteen Jupyter notebooks that call a small Python package (`src/eegad`).
 
 **Objective.** To determine whether resting-state EEG adds information about Alzheimer's disease (AD) beyond
 sociodemographic variables, and whether this added information survives confounder control and transfer across cohorts.
@@ -15,7 +15,7 @@ sociodemographic variables, and whether this added information survives confound
 | **RQ1c** | Is the incremental effect the same in both cohorts? (pooled model, cohort × EEG) | 03 |
 | **RQ2a** | BrainLat: education-matched pairs, comparable pairs, overlap weights (age, sex, education) | 04 |
 | **RQ2b** | Greek: overlap weights (age, sex) and comparable pairs (same sex, age ±2 y) | 04 |
-| **RQ3a / RQ3b** | Frozen model moved BrainLat → Greek (primary) and Greek → BrainLat | 05 |
+| **RQ3a / RQ3b** | Frozen model moved BrainLat => Greek (primary) and Greek → BrainLat | 05 |
 | Exploratory | Within AD, does the EEG score track cognitive severity (MoCA, MMSE)? | 06 |
 | Sensitivity | 7 spectral features; no gamma; no high-gamma epochs; SVM; XGBoost | 06 |
 | *Post hoc (amendment 1)* | Does a local recalibration, without retraining, fix the probabilities of the transported models? | 09 |
