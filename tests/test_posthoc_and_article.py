@@ -165,8 +165,12 @@ def test_new_figures_draw(tmp_path):
 def test_late_fusion_figure_draws(tmp_path):
     import matplotlib
     matplotlib.use("Agg")
+    import warnings
     from eegad.fusion_figure import late_fusion_figure
-    fig = late_fusion_figure()
+    with warnings.catch_warnings():
+        warnings.filterwarnings("error", message=".*missing from font")         # every glyph must exist
+        fig = late_fusion_figure()
+        fig.canvas.draw()
     assert abs(fig.get_size_inches()[0] - 7.1) < 1e-9                    # same width as Fig. 1
     fig.savefig(tmp_path / "fusion.pdf")
     fig.savefig(tmp_path / "fusion.svg")

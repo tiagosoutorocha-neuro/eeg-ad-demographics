@@ -1,5 +1,10 @@
 # Changes
 
+## 1.2.1 — 2026-11-27
+
+- Fig. 2: the subscripts of β₀–β₃ are drawn with matplotlib mathtext; Arial (Windows) has no subscript digits and
+  showed empty boxes. The test of the figure now fails if any glyph is missing from the font.
+
 ## 1.2.0 — 2026-11-27
 
 Additions only: no analysis is changed and no result moves (the analysis plan, the two post hoc amendments and the 546

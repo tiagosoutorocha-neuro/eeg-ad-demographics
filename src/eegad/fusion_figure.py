@@ -173,7 +173,7 @@ def late_fusion_figure():
     MX0, MX1 = 77.3, 97.9
     box(MX0, 61.4, MX1 - MX0, 8.6, fc=SOFT, r=0.8, z=2)
     text(MX0 + 1.0, 68.4, "Model 0: demographics only", MX1 - 0.3, size=6.6, weight="bold")
-    text(MX0 + 1.0, 66.5, "logit P(AD) = β₀ + β₁ age\n+ β₂ sex + β₃ education", MX1 - 0.3, size=BASE, va="top",
+    text(MX0 + 1.0, 66.5, "logit P(AD) = $β_0$ + $β_1$ age\n+ $β_2$ sex + $β_3$ education", MX1 - 0.3, size=BASE, va="top",
          linespacing=1.3)
     box(MX0, 49.6, MX1 - MX0, 10.0, fc=SOFT, ec=BLUE, lw=1.0, r=0.8, z=2)
     text(MX0 + 1.0, 58.0, "Model 1: adds the EEG score", MX1 - 0.3, size=6.6, weight="bold")
