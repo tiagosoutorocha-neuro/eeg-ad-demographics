@@ -1,5 +1,22 @@
 # Changes
 
+## 1.2.0 — 2026-11-27
+
+Additions only: no analysis is changed and no result moves (the analysis plan, the two post hoc amendments and the 546
+key numbers compared by notebook 08 are unchanged).
+
+- New Fig. 2 (`src/eegad/fusion_figure.py`, drawn by notebook 12): how the demographics and the EEG were combined —
+  two-stage late fusion (stacking). Stage 1, the Random Forest on the EEG features alone, leave-one-subject-out, gives
+  one out-of-fold score per participant; stage 2 adds that score to a logistic model of the demographics (Model 0
+  against Model 1); the figure also shows what each comparison answers and why the demographics were not put in the
+  Random Forest (early fusion). Schematic: it reads no data. PDF, PNG and SVG with editable text.
+- Main figures renumbered in the order of first citation (Fig. 2 is cited in the Methods): participant flow 2 → 3,
+  ROC curves 3 → 4, RQ1 4 → 5, RQ2 5 → 6, RQ3 6 → 7, features 7 → 8. File names, legends, README and tests follow.
+  Supplementary figures keep their numbers. The frozen `config/post_hoc_plan.json` keeps its original label (its
+  Fig. 6 is now Fig. 7).
+- Notebook 12 deletes the figure files of an earlier run before writing, so that no file of the old numbering stays
+  in `outputs/article/`.
+
 ## 1.1.0 — 2026-11-25
 
 Additions only: notebooks 00–08, the analysis plan (hash `d694ec84c0e48616`), every pre-specified result and the 546

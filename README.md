@@ -174,7 +174,7 @@ because it then cannot stop early.
 | `reproduction_check.csv` | Comparison with the original run (notebook 08) |
 | `post_hoc/` | Post hoc amendments 1 and 2 (notebooks 09 and 10): frozen amendments, Tables S7 and S11, recalibrated predictions |
 | `descriptive/` | Notebook 11: participant spectra (local only), group spectra (`spectra_by_group.csv`, shareable), montage geometry |
-| `article/Fig1`–`Fig7`, `FigS1`–`FigS5` | Figures of the article (notebook 12): PDF with embedded fonts and PNG at 300 dpi; Fig. 1 also as SVG with editable text |
+| `article/Fig1`–`Fig8`, `FigS1`–`FigS5` | Figures of the article (notebook 12): PDF with embedded fonts and PNG at 300 dpi; Figs. 1 and 2 (schematics) also as SVG with editable text |
 | `article/article_tables.docx` | Every table of the article and supplement (Tables 1–5, S1–S12, TRIPOD+AI checklist) and draft figure legends, in one Word file; rewritten at every run |
 | `article/supplementary_files/` | The analysis plan and the two post hoc amendments (JSON), for the supplementary information |
 

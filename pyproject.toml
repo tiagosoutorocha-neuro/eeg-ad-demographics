@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "eegad"
-version = "1.1.0"
+version = "1.2.0"
 description = "Incremental value, confounding and transportability of resting-state EEG for Alzheimer's disease (BrainLat and ds004504)"
 readme = "README.md"
 license = "MIT"

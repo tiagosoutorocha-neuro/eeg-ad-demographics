@@ -26,9 +26,10 @@ def test_whole_pipeline_on_synthetic_data(tmp_path):
               "post_hoc/post_hoc_plan_frozen.json", "post_hoc/recalibration_table.csv",
               "post_hoc/post_hoc_plan_2_frozen.json", "post_hoc/hyperparameter_table.csv",
               "descriptive/spectra_by_group.csv", "descriptive/montage_targets.csv",
-              "article/Fig1_study_design.pdf", "article/Fig1_study_design.svg", "article/Fig4_RQ1_incremental_value.pdf",
-              "article/Fig5_RQ2_confounding_by_design.pdf", "article/Fig6_RQ3_transportability.pdf",
-              "article/Fig7_feature_consistency.pdf", "article/FigS1_montage_error.pdf",
+              "article/Fig1_study_design.pdf", "article/Fig1_study_design.svg", "article/Fig2_late_fusion.pdf",
+              "article/Fig2_late_fusion.svg", "article/Fig5_RQ1_incremental_value.pdf",
+              "article/Fig6_RQ2_confounding_by_design.pdf", "article/Fig7_RQ3_transportability.pdf",
+              "article/Fig8_feature_consistency.pdf", "article/FigS1_montage_error.pdf",
               "article/FigS2_group_spectra.pdf", "article/FigS3_e_value.pdf", "article/FigS4_domain_shift.pdf",
               "article/FigS5_hyperparameters.pdf", "article/supplementary_files/post_hoc_plan_2.json"):
         assert (out / f).exists(), f

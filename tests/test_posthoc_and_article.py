@@ -85,7 +85,7 @@ def test_post_hoc_plan_amends_the_frozen_plan_and_is_frozen(repo_with_posthoc):
 def test_article_tables_without_outputs(tmp_path):
     blocks = build_blocks(tmp_path, {"plan_hash": "x", "mode": "quick"})
     kinds = [k for k, _ in blocks]
-    assert "warning" in kinds and kinds.count("legend") == 12
+    assert "warning" in kinds and kinds.count("legend") == 13          # Figs. 1-8 and S1-S5
     labels = [v["label"] for k, v in blocks if k == "table"]
     assert labels == ["Table 1", "Table S12"]          # related work and validity criteria need no outputs
     html = write_html(blocks, tmp_path / "t.html").read_text(encoding="utf-8")
@@ -160,3 +160,15 @@ def test_new_figures_draw(tmp_path):
             "RQ3b": {"auc": [0.7, 0.6, 0.8], "calibration_slope": 1.0}} for i in range(4)]
     fig_hyperparameters(res).savefig(tmp_path / "s5.png")
     assert all((tmp_path / f).stat().st_size > 5000 for f in ("s1.png", "s2.png", "s5.png"))
+
+
+def test_late_fusion_figure_draws(tmp_path):
+    import matplotlib
+    matplotlib.use("Agg")
+    from eegad.fusion_figure import late_fusion_figure
+    fig = late_fusion_figure()
+    assert abs(fig.get_size_inches()[0] - 7.1) < 1e-9                    # same width as Fig. 1
+    fig.savefig(tmp_path / "fusion.pdf")
+    fig.savefig(tmp_path / "fusion.svg")
+    assert b"/Type3" not in (tmp_path / "fusion.pdf").read_bytes()      # fonts embedded as TrueType
+    assert "Model 1" in (tmp_path / "fusion.svg").read_text(encoding="utf-8")   # editable text

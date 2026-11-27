@@ -391,24 +391,35 @@ FIGURE_LEGENDS = [
                "harmonised pipeline applied identically to both cohorts: common 19-electrode montage, pass band and "
                "reference, 4-s epochs, 11 features and a Random Forest evaluated with leave-one-subject-out "
                "cross-validation. (c) The three research questions."),
-    ("Fig. 2", "Participant flow in each cohort, with the number excluded at each step and why."),
-    ("Fig. 3", "Receiver operating characteristic curves of the EEG score (within-cohort and from the other cohort's "
+    ("Fig. 2", "How the demographics and the EEG were combined: two-stage late fusion (stacking); schematic, no "
+               "data. (a) Stage 1, at the epoch level: a Random Forest trained on the 11 EEG features of all "
+               "participants but one (leave-one-subject-out) predicts P(AD) for each 4-s epoch of the left-out "
+               "participant; the mean over epochs is that participant's EEG score s. (b) Stage 2, at the participant "
+               "level: the logit of s, standardised within the cohort (z), is added to a logistic model of the "
+               "demographics; exp(γ) is the odds ratio per SD of the score. (c) The comparisons built on stage 2: the "
+               "test of incremental value (RQ1), with the p-value from a null bootstrap that re-runs both stages on "
+               "diagnoses simulated without an EEG effect; discrimination (AUC; logistic models refitted leaving one "
+               "participant out); and the independent check, in which s is replaced by the score of the model "
+               "trained on the other cohort. (d) Early fusion, not used: adding the demographics to the Random "
+               "Forest would copy each participant's values to every epoch."),
+    ("Fig. 3", "Participant flow in each cohort, with the number excluded at each step and why."),
+    ("Fig. 4", "Receiver operating characteristic curves of the EEG score (within-cohort and from the other cohort's "
                "model), the demographic model and the demographic model plus the EEG score, in each cohort."),
-    ("Fig. 4", "RQ1, incremental value. (a) Odds ratio of AD per 1 SD of the EEG score beyond the demographics, with "
+    ("Fig. 5", "RQ1, incremental value. (a) Odds ratio of AD per 1 SD of the EEG score beyond the demographics, with "
                "95% CI, in each cohort, in both cohorts together, for the score of the other cohort's model "
                "(independent) and with site added (check). (b, c) Null distributions of the test statistic from the "
                "parametric bootstrap that re-runs the whole leave-one-subject-out procedure under the null "
                "hypothesis; vertical line, observed value; dashed curve, reference distribution of the naive test."),
-    ("Fig. 5", "RQ2, confounding by design. (a) Discrimination of the EEG score when AD and controls are made "
+    ("Fig. 6", "RQ2, confounding by design. (a) Discrimination of the EEG score when AD and controls are made "
                "comparable in the demographics (pairs, comparable pairs, overlap weights; open symbols: whole-cohort "
                "reference and covariate-adjusted check). (b, c) Covariate balance before and after adjustment "
                "(standardised mean differences; grey band, |SMD| < 0.1)."),
-    ("Fig. 6", "RQ3, transportability. (a, b) Calibration of the frozen models in the other cohort (points: "
+    ("Fig. 7", "RQ3, transportability. (a, b) Calibration of the frozen models in the other cohort (points: "
                "quintiles of predicted probability with Wilson 95% intervals; lines: logistic calibration curves) "
                "and after local recalibration (post hoc, leave-one-out within the target cohort). Ticks on the top "
                "and bottom axes: predictions of the AD and control participants. (c, d) Predicted probabilities by "
                "diagnosis before and after recalibration; dashed line, threshold 0.5."),
-    ("Fig. 7", "Each EEG feature beyond the demographics in both cohorts (odds ratio per 1 SD with 95% CI; filled "
+    ("Fig. 8", "Each EEG feature beyond the demographics in both cohorts (odds ratio per 1 SD with 95% CI; filled "
                "symbols: Benjamini–Hochberg q < 0.05 within cohort). Descriptive, outside the reading rules."),
     ("Fig. S1", "Correspondence between the BrainLat electrodes and the 10-20 system, seen from above (nose up). Open "
                 "circles, the 19 standard positions; filled circles, the BioSemi electrode used for each, coloured by "

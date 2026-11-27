@@ -1,8 +1,8 @@
 cff-version: 1.2.0
 message: "If you use this code, please cite the article and this software."
 title: "eeg-ad-demographics: incremental value, confounding and transportability of resting-state EEG for Alzheimer's disease"
-version: 1.1.0
-date-released: 2026-11-25
+version: 1.2.0
+date-released: 2026-11-27
 license: MIT
 repository-code: "https://github.com/tiagosoutorocha-neuro/eeg-ad-demographics"
 authors:

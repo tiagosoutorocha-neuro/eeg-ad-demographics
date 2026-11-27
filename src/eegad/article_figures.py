@@ -1,9 +1,10 @@
 """Article figures, one per research question (notebook 12). They only read files already in outputs/.
+(Fig. 1, study design: design_figure.py; Fig. 2, late fusion: fusion_figure.py; Fig. 4, ROC curves: figures.py)
 
-Fig. 4  RQ1  incremental value: odds ratios + null-bootstrap distributions
-Fig. 5  RQ2  confounding by design: confounding-free AUCs + covariate balance (Love plots)
-Fig. 6  RQ3  transportability: calibration of the frozen models and post hoc recalibration
-Fig. 7  per-feature consistency between the cohorts (descriptive)
+Fig. 5  RQ1  incremental value: odds ratios + null-bootstrap distributions
+Fig. 6  RQ2  confounding by design: confounding-free AUCs + covariate balance (Love plots)
+Fig. 7  RQ3  transportability: calibration of the frozen models and post hoc recalibration
+Fig. 8  per-feature consistency between the cohorts (descriptive)
 Fig. S1 angular error of the BrainLat 10-20 correspondence (descriptive; amendment 2)
 Fig. S2 group-average spectra by cohort and diagnosis (descriptive; amendment 2)
 Fig. S3 E-value (unmeasured education in the Greek cohort)
@@ -76,7 +77,7 @@ def log2_ticks(ax, vmin, vmax, max_ticks=10):
     ax.xaxis.set_minor_formatter(NullFormatter())
 
 
-# ---- Fig. 2 — participant flow at article size --------------------------------------------------------------------
+# ---- Fig. 3 — participant flow at article size --------------------------------------------------------------------
 def _flow_text(r):
     ftd = r.get("FTD")
     extra = f", FTD {int(ftd)}" if ftd is not None and pd.notna(ftd) and float(ftd) > 0 else ""
@@ -119,7 +120,7 @@ def fig_flow(flow):
     return fig
 
 
-# ---- Fig. 4 — RQ1 ---------------------------------------------------------------------------------------------------
+# ---- Fig. 5 — RQ1 ---------------------------------------------------------------------------------------------------
 def rq1_rows(inc, tr):
     """Rows of the odds-ratio panel from results/incremental.json and results/transport.json."""
     I, P, H, B, ind = inc["INC"], inc["R_POOL"], inc["R_HET"], inc["BOOT"], tr["INC_IND"]
@@ -225,7 +226,7 @@ def fig_rq1(inc, tr, boot_bl, boot_gr):
     return fig
 
 
-# ---- Fig. 5 — RQ2 ---------------------------------------------------------------------------------------------------
+# ---- Fig. 6 — RQ2 ---------------------------------------------------------------------------------------------------
 DESIGN_SHORT = {"Full cohort": "Whole cohort (reference)",
                 "Education-matched 1:1 (±2 y)": "1:1 pairs matched on education (±2 y)",
                 "Comparable-pair concordance (education ±2 y)": "All pairs with education ±2 y",
@@ -321,7 +322,7 @@ def fig_rq2(t2b, bal_bl_match, bal_bl_ow, bal_gr_ow):
     return fig
 
 
-# ---- Fig. 6 — RQ3 ---------------------------------------------------------------------------------------------------
+# ---- Fig. 7 — RQ3 ---------------------------------------------------------------------------------------------------
 def draw_calibration(ax, subj, res, versions=("frozen", "intercept_and_slope"), n_bins=5):
     y = subj["y"].to_numpy(int)
     ax.plot([0, 1], [0, 1], color="0.6", lw=0.7, ls=":")
@@ -395,7 +396,7 @@ def fig_rq3(subj_a, res_a, subj_b, res_b, threshold, auc_a, auc_b):
     return fig
 
 
-# ---- Fig. 7 — per-feature consistency ------------------------------------------------------------------------------
+# ---- Fig. 8 — per-feature consistency ------------------------------------------------------------------------------
 def feature_rows(keys, features):
     """Per-feature OR/SD and BH q from results/key_results.json (keys features.<feature>.<cohort>.*)."""
     def k(name):
